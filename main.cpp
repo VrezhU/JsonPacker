@@ -3,6 +3,12 @@
 
 #include "JsonTLV/JsonTLV.h"
 
+/**
+ * @brief main the start pint
+ * @param argc count of arguments passed to app
+ * @param argv arguments list passed to app. Need json(required) and TLV(optional) files in argument list.
+ * @return
+ */
 int main(int argc, char** argv)
 {
     std::string jsonFilePath = "";
@@ -23,14 +29,17 @@ int main(int argc, char** argv)
         std::cout << ex.what() << std::endl;
         return 0;
     }
+    std::cout << "json(input) file: " << jsonFilePath << std::endl;
+    std::cout << "TLV(output) file: " << tlvFilePath << std::endl;
 
     JsonTLV jsonTLV;
     jsonTLV.encodeJsonFile(jsonFilePath, tlvFilePath);
-    jsonTLV.decodeTVLFile(tlvFilePath);
+    jsonTLV.decodeTLVFile(tlvFilePath);
 
     std::string keyTlvFilePath = jsonFilePath;
     keyTlvFilePath.replace(keyTlvFilePath.size() - 4, keyTlvFilePath.size() - 1, "_key.tlv");
-    jsonTLV.decodeTVLFile(keyTlvFilePath);
+    std::cout << "TLV KeyMap(output) file: " << keyTlvFilePath << std::endl;
+    jsonTLV.decodeTLVFile(keyTlvFilePath);
 
     return 0;
 }

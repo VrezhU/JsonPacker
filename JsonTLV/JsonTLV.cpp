@@ -22,7 +22,7 @@ unsigned int JsonTLV::getFileSize(std::ifstream& file) {
     return fileSize;
 }
 
-void JsonTLV::decodeTVLFile(const std::string& tlvFilePath){
+void JsonTLV::decodeTLVFile(const std::string& tlvFilePath) {
     std::ifstream tlvFile(tlvFilePath, std::ios::in | std::ios::binary);
     if (!tlvFile) {
        std::cout << "decodeTVLFile: " << tlvFilePath
@@ -128,7 +128,7 @@ void JsonTLV::encodeJsonKeyMap(const std::string& tlvFilePath) {
     tlvFile.close();
 }
 
-void JsonTLV::encodeJsonLine(const std::string& tlvFilePath,
+void JsonTLV::encodeJsonValue(const std::string& tlvFilePath,
                              const json& jsonLine,
                              const std::string &keyStr,
                              json::value_t type) {
@@ -193,7 +193,7 @@ void JsonTLV::encodeJsonFile(const std::string& jsonFilePath, const std::string&
         while (getline(jsonFile, line)) {
             json jsonLine = json::parse(line);
             for (auto& el: jsonLine.items())
-                encodeJsonLine(tlvFilePathUpdated, jsonLine, el.key(), el.value().type());
+                encodeJsonValue(tlvFilePathUpdated, jsonLine, el.key(), el.value().type());
         }
 
         encodeJsonKeyMap(keyTlvFilePath);
