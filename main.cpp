@@ -36,7 +36,7 @@ int main(int argc, char** argv)
     jsonTLV.encodeJsonFile(jsonFilePath, tlvFilePath);
     jsonTLV.decodeTLVFile(tlvFilePath);
 
-    std::string keyTlvFilePath = jsonFilePath;
+    std::string keyTlvFilePath = tlvFilePath;
     keyTlvFilePath.replace(keyTlvFilePath.size() - 4, keyTlvFilePath.size() - 1, "_key.tlv");
     std::cout << "TLV KeyMap(output) file: " << keyTlvFilePath << std::endl;
     jsonTLV.decodeTLVFile(keyTlvFilePath);
